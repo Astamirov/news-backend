@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 
+
+
 module.exports = async (req, res, next) => {
         const { authorization } = req.headers;
 
@@ -14,9 +16,7 @@ module.exports = async (req, res, next) => {
         }
 
         try {
-            console.log(token, 'token')
             req.user = await jwt.verify(token, process.env.SECRET_JWT_KEY);
-            
             next()
         } catch (e) {
             return res.status(401).json({e});
